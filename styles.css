@@ -1,0 +1,23 @@
+.card {
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+#pinyin {
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    font-size: 20pt;
+}
+
+#definition {
+    display: inline-block;
+    text-align: left;
+    font-size: 12pt;
+}
+
+#writing {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+}

@@ -1,0 +1,66 @@
+<script>
+    var DEFINITIONS = "https://gist.githubusercontent.com/LogStar100/435c92b551a7e48e8eb3e1350a12cce3/raw/b382b93ea141bf0a8e8ba1a60945d9f6622ebe76/kDefinition.json";
+    var PINYIN = "https://gist.githubusercontent.com/LogStar100/435c92b551a7e48e8eb3e1350a12cce3/raw/b382b93ea141bf0a8e8ba1a60945d9f6622ebe76/kMandarin.json";
+
+    var injectScript = (src) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    };
+
+    var loadJson = (url) => {
+        return new Promise((resolve, reject) => {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "json";
+            xhr.onload = () => {
+                var status = xhr.status;
+                if (status == 200) {
+                    resolve(xhr.response);
+                } else {
+                    reject(status);
+                }
+            };
+            xhr.send();
+        });
+    };
+
+    (async () => {
+        const [definitions, pinyins] = await Promise.all([
+            loadJson(DEFINITIONS),
+            loadJson(PINYIN),
+            (async () => {
+                if (typeof HanziWriter === "undefined") {
+                    await injectScript("https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js")
+                }
+            })()
+        ]);
+
+        document.getElementById('definition').innerHTML = definitions["{{Hanzi}}"];
+        document.getElementById('pinyin').innerHTML = pinyins["{{Hanzi}}"];
+
+        var writer = HanziWriter.create('writing', '{{Hanzi}}', {
+            width: 300,
+            height: 300,
+            showCharacter: false,
+            showOutline: true,
+            delayBetweenStrokes: 500,
+            padding: 5,
+            strokeColor: '#FF0000'
+        });
+
+        writer.animateCharacter();
+    })();
+</script>
+
+<div id="pinyin"></div>
+<br />
+<div id="definition"></div>
+<br />
+<br />
+<div id="writing"></div>
