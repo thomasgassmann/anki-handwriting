@@ -15,13 +15,13 @@ model = genanki.Model(
         },
     ])
 
-
 deck = genanki.Deck(
     2059400110,
-    'Country Capitals')
+    'Hanzi-Writing')
 
 deck.add_model(model)
 
+# apparently anki needs at least one note for it to import the model?
 deck.add_note(genanki.Note(
     model=model,
     fields=['你']))
