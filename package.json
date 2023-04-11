@@ -1,0 +1,34 @@
+{
+  "name": "anki-handwriting",
+  "version": "1.0.0",
+  "description": "Hanzi Handwriting in Anki",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "anki": "yarn build && ./.venv/bin/python gen.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasgassmann/anki-handwriting.git"
+  },
+  "author": "Thomas Gassmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thomasgassmann/anki-handwriting/issues"
+  },
+  "homepage": "https://github.com/thomasgassmann/anki-handwriting#readme",
+  "dependencies": {
+    "hanzi-writer": "^3.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
+    "html-webpack-plugin": "^5.5.0",
+    "inline-chunk-html-plugin": "^1.1.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
